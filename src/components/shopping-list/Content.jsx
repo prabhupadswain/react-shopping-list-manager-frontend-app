@@ -1,5 +1,6 @@
 import { useState } from "react";
-import ShoppingListItem from "./ShoppingListItem";
+import ShoppingList from "./ShoppingList";
+import EmptyMessage from "../error/EmptyMessage";
 
 const Content = () => {
   const [shoppingItems, setShoppingItems] = useState([
@@ -25,39 +26,15 @@ const Content = () => {
     },
   ]);
 
-  const checkBoxChangeHandler = (id) => {
-    const newShoppingItems = shoppingItems.map((shoppingItem) => {
-      return shoppingItem.id === id
-        ? { ...shoppingItem, checked: !shoppingItem.checked }
-        : shoppingItem;
-    });
-
-    setShoppingItems(newShoppingItems);
-    localStorage.setItem("shopping-list", JSON.stringify(newShoppingItems));
-  };
-
-  const deleteShoppingItemHandler = (id) => {
-    const newShoppingItems = shoppingItems.filter(
-      (shoppingItem) => shoppingItem.id !== id
-    );
-    setShoppingItems(newShoppingItems);
-    localStorage.setItem("shopping-list", JSON.stringify(newShoppingItems));
-  };
-
   return (
     <main>
-      <ul className="list-group list-group-flush mt-4">
-        {shoppingItems.map((shoppingItem) => {
-          return (
-            <ShoppingListItem
-              key={shoppingItem.id}
-              shoppingItem={shoppingItem}
-              onCheckBoxChange={checkBoxChangeHandler}
-              onDeleteShoppingItem={deleteShoppingItemHandler}
-            />
-          );
-        })}
-      </ul>
+      {shoppingItems.length === 0 && <EmptyMessage />}
+      {shoppingItems.length >= 1 && (
+        <ShoppingList
+          data={shoppingItems}
+          setShoppingItems={setShoppingItems}
+        />
+      )}
     </main>
   );
 };
