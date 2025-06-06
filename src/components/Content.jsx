@@ -25,6 +25,15 @@ const Content = () => {
     },
   ]);
 
+  const checkBoxChangeHandler = (id) => {
+    const newShoppingItems = shoppingItems.map((shoppingItem) => {
+      return shoppingItem.id === id
+        ? { ...shoppingItem, checked: !shoppingItem.checked }
+        : shoppingItem;
+    });
+
+    setShoppingItems(newShoppingItems);
+  };
   return (
     <main>
       <ul className="list-group list-group-flush mt-4">
@@ -33,6 +42,7 @@ const Content = () => {
             <ShoppingListItem
               key={shoppingItem.id}
               shoppingItem={shoppingItem}
+              onCheckBoxChange={checkBoxChangeHandler}
             />
           );
         })}
