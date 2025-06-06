@@ -1,7 +1,7 @@
 import styles from "./App.module.css";
-import Header from "./components/Header";
-import Content from "./components/Content";
-import Footer from "./components/Footer";
+import Header from "./components/ui/Header";
+import Content from "./components/shopping-list/Content";
+import Footer from "./components//ui/Footer";
 
 function App() {
   return (
