@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ShoppingListItem from "./ShoppingListItem";
+
 const Content = () => {
   const [shoppingItems, setShoppingItems] = useState([
     {
@@ -23,7 +25,20 @@ const Content = () => {
     },
   ]);
 
-  return <main></main>;
+  return (
+    <main>
+      <ul className="list-group list-group-flush mt-4">
+        {shoppingItems.map((shoppingItem) => {
+          return (
+            <ShoppingListItem
+              key={shoppingItem.id}
+              shoppingItem={shoppingItem}
+            />
+          );
+        })}
+      </ul>
+    </main>
+  );
 };
 
 export default Content;
