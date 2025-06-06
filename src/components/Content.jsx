@@ -33,7 +33,17 @@ const Content = () => {
     });
 
     setShoppingItems(newShoppingItems);
+    localStorage.setItem("shopping-list", JSON.stringify(newShoppingItems));
   };
+
+  const deleteShoppingItemHandler = (id) => {
+    const newShoppingItems = shoppingItems.filter(
+      (shoppingItem) => shoppingItem.id !== id
+    );
+    setShoppingItems(newShoppingItems);
+    localStorage.setItem("shopping-list", JSON.stringify(newShoppingItems));
+  };
+
   return (
     <main>
       <ul className="list-group list-group-flush mt-4">
@@ -43,6 +53,7 @@ const Content = () => {
               key={shoppingItem.id}
               shoppingItem={shoppingItem}
               onCheckBoxChange={checkBoxChangeHandler}
+              onDeleteShoppingItem={deleteShoppingItemHandler}
             />
           );
         })}

@@ -1,6 +1,14 @@
-const ShoppingListItem = ({ shoppingItem, onCheckBoxChange }) => {
+const ShoppingListItem = ({
+  shoppingItem,
+  onCheckBoxChange,
+  onDeleteShoppingItem,
+}) => {
   const checkBoxChangeHandler = (itemId) => {
     onCheckBoxChange(itemId);
+  };
+
+  const deleteShoppingListItem = (itemId) => {
+    onDeleteShoppingItem(itemId);
   };
 
   return (
@@ -16,7 +24,12 @@ const ShoppingListItem = ({ shoppingItem, onCheckBoxChange }) => {
           <label className="ms-4 mb-0">{shoppingItem.item}</label>
         </div>
 
-        <button className="btn btn-danger btn-sm">DELETE</button>
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={() => deleteShoppingListItem(shoppingItem.id)}
+        >
+          DELETE
+        </button>
       </li>
     </>
   );
