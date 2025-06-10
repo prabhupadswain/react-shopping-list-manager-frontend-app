@@ -2,6 +2,7 @@ import { useState } from "react";
 import ShoppingList from "./ShoppingList";
 import EmptyMessage from "../error/EmptyMessage";
 import DisplayCount from "../error/DisplayCount";
+import AddNewShoppingItem from "./AddNewShoppingItem";
 
 const Content = () => {
   const [shoppingItems, setShoppingItems] = useState([
@@ -27,8 +28,31 @@ const Content = () => {
     },
   ]);
 
+  const [addNewItem, setAddNewItem] = useState("");
+
+  const addNewShoppingItems = (item) => {
+    const id = shoppingItems.length
+      ? shoppingItems[shoppingItems.length - 1].id + 1
+      : 1;
+    const myNewItem = { id, checked: false, item };
+    const listItems = [...shoppingItems, myNewItem];
+    setShoppingItems(listItems);
+    localStorage.setItem("shopping-list", JSON.stringify(listItems));
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    if (!addNewItem) return;
+    addNewShoppingItems(addNewItem);
+    setAddNewItem("");
+  };
   return (
     <main>
+      <AddNewShoppingItem
+        onSubmitHandler={submitHandler}
+        onAddNewItem={addNewItem}
+        onSetAddNewItem={setAddNewItem}
+      />
       {shoppingItems.length === 0 && <EmptyMessage />}
       {shoppingItems.length >= 1 && (
         <ShoppingList
