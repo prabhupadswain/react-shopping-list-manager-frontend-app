@@ -18,7 +18,7 @@ const AddNewShoppingItem = ({
           </div>
           <div className="col-auto">
             <input
-              type="textbox"
+              type="text"
               placeholder="Add New Item"
               id="addNewItem"
               className="form-control"

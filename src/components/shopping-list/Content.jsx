@@ -3,6 +3,7 @@ import ShoppingList from "./ShoppingList";
 import EmptyMessage from "../error/EmptyMessage";
 import DisplayCount from "../error/DisplayCount";
 import AddNewShoppingItem from "./AddNewShoppingItem";
+import SearchShoppingItem from "./SearchShoppingItems";
 
 const Content = () => {
   const [shoppingItems, setShoppingItems] = useState([
@@ -29,6 +30,7 @@ const Content = () => {
   ]);
 
   const [addNewItem, setAddNewItem] = useState("");
+  const [searchItems, setSearchItems] = useState("");
 
   const addNewShoppingItems = (item) => {
     const id = shoppingItems.length
@@ -53,10 +55,16 @@ const Content = () => {
         onAddNewItem={addNewItem}
         onSetAddNewItem={setAddNewItem}
       />
+      <SearchShoppingItem
+        onSearchItems={searchItems}
+        onSetSearchItems={setSearchItems}
+      />
       {shoppingItems.length === 0 && <EmptyMessage />}
       {shoppingItems.length >= 1 && (
         <ShoppingList
-          data={shoppingItems}
+          data={shoppingItems.filter((shoppingItem) =>
+            shoppingItem.item.toLowerCase().includes(searchItems.toLowerCase())
+          )}
           setShoppingItems={setShoppingItems}
         />
       )}
