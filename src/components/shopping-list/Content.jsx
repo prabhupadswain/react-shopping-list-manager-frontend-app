@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ShoppingList from "./ShoppingList";
 import EmptyMessage from "../error/EmptyMessage";
+import DisplayCount from "../error/DisplayCount";
 
 const Content = () => {
   const [shoppingItems, setShoppingItems] = useState([
@@ -35,6 +36,7 @@ const Content = () => {
           setShoppingItems={setShoppingItems}
         />
       )}
+      <DisplayCount count={shoppingItems.length} />
     </main>
   );
 };
