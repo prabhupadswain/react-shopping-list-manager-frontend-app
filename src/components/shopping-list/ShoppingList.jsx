@@ -7,9 +7,7 @@ const ShoppingList = ({ data, setShoppingItems }) => {
         ? { ...shoppingItem, checked: !shoppingItem.checked }
         : shoppingItem;
     });
-
     setShoppingItems(newShoppingItems);
-    localStorage.setItem("shopping-list", JSON.stringify(newShoppingItems));
   };
 
   const deleteShoppingItemHandler = (id) => {
@@ -17,7 +15,6 @@ const ShoppingList = ({ data, setShoppingItems }) => {
       (shoppingItem) => shoppingItem.id !== id
     );
     setShoppingItems(newShoppingItems);
-    localStorage.setItem("shopping-list", JSON.stringify(newShoppingItems));
   };
 
   return (
